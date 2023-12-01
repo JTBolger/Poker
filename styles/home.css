@@ -1,0 +1,120 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+#main {
+    width: 100%;
+    height: 100%;
+    background-color: #232323;
+    position: absolute;
+    z-index: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font: menu;
+}
+#table {
+    width: 95%;
+    height: 90%;
+    background-color: rgb(25, 167, 25);
+    position: absolute;
+    border-radius: 150px;
+    border: 1rem solid #004508;
+}
+#table-deco {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#cards {
+    width: 39rem;
+    height: 9rem;
+    background-color: #00000000;
+    border: 0.35rem solid rgb(184, 0, 0);
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem;
+    gap: 1rem;
+    z-index: 2;
+}
+#cards img {
+    height: 9rem;
+    border-radius: 10px;
+}
+#line-across-thingy {
+    width: 82.5%;
+    height: 70%;
+    background-color: rgb(30 131 30);
+    border-radius: 100px;
+    position: absolute;
+    z-index: 1;
+    border: 1rem solid white;
+}
+#player-area {
+    width: 30%;
+    height: 30%;
+    background-color: #23232323;
+    position: absolute;
+    bottom: 0px;
+    left: 34.9%;
+    z-index: 5;
+    border-top-right-radius: 100%;
+    border-top-left-radius: 100%;
+    display: flex;
+    justify-content: center;
+}
+#bet-button, #confirm-bet-button {
+    color: white;
+    width: 5rem;
+    height: 2rem;
+    font: menu;
+    font-size: 1.5rem;
+    background-color: rgb(0, 125, 0);
+    text-shadow: 2px 2px 2px black;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border-bottom: 5px solid rgb(0 100 0);
+    border-right: 5px solid rgb(0 100 0);
+    border-top: 5px solid rgb(0 150 0);
+    border-left: 5px solid rgb(0 150 0);
+    position: absolute;
+    bottom: 12.5%;
+    user-select: none;
+}
+#bet-screen {
+    width: 100%;
+    height: 100%;
+    background-color: #2323239c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 100;
+}
+#bet-screen input[type="number"] {
+    width: 8rem;
+    height: 1rem;
+    border: 0.25rem solid #777777;
+    border-radius: 15px;
+    font: menu;
+    font-size: 1.5rem;
+    padding: 1rem;
+    color: black;
+}
+#bet-screen p {
+    color: white;
+    user-select: none;
+    font-size: 1.35rem;
+    font-weight: bolder;
+    margin-bottom: 20%;
+    text-shadow: 3px 3px 0px black;
+}

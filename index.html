@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en=US">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Poker</title>
+        <link href="styles/home.css" rel="stylesheet" />
+        <link rel="icon" href="Cards/1.png">
+    </head>
+    <body>
+        <div id="main">
+            <div id="table">
+                <div id="table-deco">
+                    <div id="line-across-thingy"></div>
+                    <div id="cards">
+                        <div id="flop-card-1"><img src="Cards/1.png"></div>
+                        <div id="flop-card-2"><img src="Cards/1.png"></div>
+                        <div id="flop-card-3"><img src="Cards/1.png"></div>
+                        <div id="turn-card-1"><img src="Cards/1.png"></div>
+                        <div id="river-card-1"><img src="Cards/1.png"></div>
+                    </div>
+                </div>
+                <div id="player-area" onclick="openBet()">
+                    <div id="player-chips"></div>
+                    <div id="bet-button" onclick="openBet()">BET</div>
+                </div>
+            </div>
+            <div id="bet-screen" style="display: none;">
+                <div>
+                    <p>Place Your Bets</p>
+                    <input type="number" id="bet-box" placeholder="Bet">
+                </div>
+                <div id="confirm-bet-button" onclick="confirmBet()">BET</div>
+            </div>
+        </div>
+        <script src="scripts/main.js"></script>
+    </body>
+</html>
