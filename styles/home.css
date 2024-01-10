@@ -69,7 +69,10 @@
     display: flex;
     justify-content: center;
 }
-#bet-button, #confirm-bet-button {
+#player-area img {
+    margin-top: 20%;
+}
+#bet-button, #confirm-bet-button, #check-button, #fold-button {
     color: white;
     width: 5rem;
     height: 2rem;
@@ -89,6 +92,14 @@
     position: absolute;
     bottom: 12.5%;
     user-select: none;
+}
+#check-button {
+    left: 10%;
+    bottom: 5%;
+}
+#fold-button {
+    right: 10%;
+    bottom: 5%;
 }
 #bet-screen {
     width: 100%;
@@ -117,4 +128,76 @@
     font-weight: bolder;
     margin-bottom: 20%;
     text-shadow: 3px 3px 0px black;
+}
+#player-bet-number {
+    color: white;
+    font: menu;
+    font-size: 1.5rem;
+    position: absolute;
+}
+
+#CPU-1, #CPU-2, #CPU-3, #CPU-4 {
+    background-color: #23232323;
+    position: absolute;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+}
+#CPU-1 {
+    left: 10%;
+    bottom: 0px;
+    border-top-right-radius: 100%;
+    border-top-left-radius: 100%;
+    width: 20%;
+    height: 20%;
+}
+#CPU-2 {
+    left: 70%;
+    bottom: 0px;
+    border-top-right-radius: 100%;
+    border-top-left-radius: 100%;
+    width: 20%;
+    height: 20%;
+}
+#CPU-3 {
+    left: 0%;
+    bottom: 35%;
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    width: 10%;
+    height: 35%;
+}
+#CPU-4 {
+    left: 90%;
+    bottom: 35%;
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+    width: 10%;
+    height: 35%;
+}
+#CPU-1 #player-icon {
+    position: absolute;
+    top: -25%;
+    width: 24%;
+    height: 45%;
+}
+#CPU-2 #player-icon {
+    position: absolute;
+    top: -25%;
+    width: 24%;
+    height: 45%;
+}
+#CPU-3 #player-icon {
+    position: absolute;
+    right: -25%;
+    top: 30%;
+    width: 45%;
+    height: 25%;
+}
+#CPU-4 #player-icon {
+    position: absolute;
+    left: -25%;
+    top: 30%;
+    width: 45%;
+    height: 25%;
 }

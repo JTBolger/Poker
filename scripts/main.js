@@ -1,6 +1,7 @@
 var betScreen = document.getElementById("bet-screen")
 var betBox = document.getElementById("bet-box")
 var playerChips = document.getElementById("player-chips")
+var playerBetNumber = document.getElementById("player-bet-number")
 
 var bet = 0
 var playerTot = 100
@@ -27,4 +28,10 @@ function confirmBet() {
     else if (bet > 50 && bet <= 100) {
         playerChips.innerHTML = "<img src=\"Chips/chip-red-3.png\" style=\"height: 6rem; bottom: 0;\">"
     }
+    playerBetNumber.innerHTML = "$"+bet
 }
+
+window.addEventListener('load', function() {
+    
+});
+  
