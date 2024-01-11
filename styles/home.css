@@ -30,6 +30,20 @@
     justify-content: center;
     align-items: center;
 }
+#pot {
+    width: 7rem;
+    height: 5rem;
+    border: 0.35rem solid rgb(119 0 0);
+    border-radius: 42px;
+    position: absolute;
+    z-index: 5;
+    top: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bolder;
+}
 #cards {
     width: 39rem;
     height: 9rem;
@@ -111,6 +125,28 @@
     position: absolute;
     z-index: 100;
 }
+#begin-game {
+    color: white;
+    width: 10rem;
+    height: 5rem;
+    font: menu;
+    font-size: 3.5rem;
+    background-color: rgb(0, 125, 0);
+    text-shadow: 2px 2px 2px black;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border-bottom: 5px solid rgb(0 100 0);
+    border-right: 5px solid rgb(0 100 0);
+    border-top: 5px solid rgb(0 150 0);
+    border-left: 5px solid rgb(0 150 0);
+    position: absolute;
+    user-select: none;
+    bottom: 43%;
+    z-index: 7;
+}
 #bet-screen input[type="number"] {
     width: 8rem;
     height: 1rem;
@@ -143,7 +179,7 @@
     display: flex;
     justify-content: center;
 }
-#CPU-1 {
+#CPU-3 {
     left: 10%;
     bottom: 0px;
     border-top-right-radius: 100%;
@@ -159,7 +195,7 @@
     width: 20%;
     height: 20%;
 }
-#CPU-3 {
+#CPU-4 {
     left: 0%;
     bottom: 35%;
     border-top-right-radius: 100%;
@@ -167,37 +203,69 @@
     width: 10%;
     height: 35%;
 }
-#CPU-4 {
-    left: 90%;
+#CPU-1 {
+    right: 0%;
     bottom: 35%;
     border-top-left-radius: 100%;
     border-bottom-left-radius: 100%;
     width: 10%;
     height: 35%;
 }
-#CPU-1 #player-icon {
+#player-icon-3 {
     position: absolute;
     top: -25%;
     width: 24%;
     height: 45%;
 }
-#CPU-2 #player-icon {
+#player-icon-2 {
     position: absolute;
     top: -25%;
     width: 24%;
     height: 45%;
 }
-#CPU-3 #player-icon {
+#player-icon-4 {
     position: absolute;
     right: -25%;
     top: 30%;
     width: 45%;
     height: 25%;
 }
-#CPU-4 #player-icon {
+#player-icon-1 {
     position: absolute;
     left: -25%;
     top: 30%;
     width: 45%;
     height: 25%;
+}
+#player-icon {
+    position: absolute;
+    top: -25%;
+    width: 5rem;
+    height: 4.25rem;
+    left: 10%;
+}
+
+#CPU1-card-1 img, #CPU1-card-2 img, #CPU2-card-1 img, #CPU2-card-2 img, #CPU3-card-1 img, #CPU3-card-2 img, #CPU4-card-1 img, #CPU4-card-2 img, #player-card-1 img, #player-card-2 img {
+    height: 5rem;
+    border-radius: 5px;
+}
+#CPU1-card-1, #CPU1-card-2, #CPU2-card-1, #CPU2-card-2, #CPU3-card-1, #CPU3-card-2, #CPU4-card-1, #CPU4-card-2, #player-card-1, #player-card-2 {
+    position: absolute;
+    z-index: 6;
+    left: 50%;
+    bottom: 150%;
+    height: 5rem;
+    transition: 0.75s;
+}
+
+#flop-card-1 img, #flop-card-2 img, #flop-card-3 img, #turn-card-1 img, #river-card-1 img {
+    height: 9rem;
+}
+#flop-card-1, #flop-card-2, #flop-card-3, #turn-card-1, #river-card-1 {
+    position: relative;
+    z-index: 6;
+    left: 50rem;
+    bottom: 150rem;
+    height: 9rem;
+    transition: 0.75s;
 }
