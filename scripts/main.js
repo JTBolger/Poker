@@ -451,10 +451,11 @@ function beginGame() {
     CPU1Bet = 2
     currentBet = 2
     pot += 4
-    rot = 2
+    rot = 0
     document.getElementById("pot").innerHTML = "$"+pot
     document.getElementById("check-button").innerHTML = "CALL"
     document.getElementById("begin-game").style.display = "none"
+    announce("Game Has Begun")
     CPUTurn(1)
 }
 function callBet() {
@@ -518,7 +519,9 @@ function CPUTurn(turn) {
             CPU1Balance -= currentBet
             // CPU1Bet = currentBet
             document.getElementById("pot").innerHTML = "$" + pot;
-            rotatePlayer()
+            if (rot != 5) {
+                rotatePlayer()
+            }
         }
         if (rot == 5) {
         if (CPU1Bet == currentBet && flopC == 1 && turnC == 1 && riverC == 1) {
@@ -565,6 +568,9 @@ function CPUTurn(turn) {
             CPU2Balance -= currentBet
             // CPU2Bet = currentBet
             document.getElementById("pot").innerHTML = "$" + pot;
+            if (rot != 5) {
+                rotatePlayer()
+            }
         }
         if (rot == 5) {
         if (CPU2Bet == currentBet && flopC == 1 && turnC == 1 && riverC == 1) {
@@ -598,7 +604,6 @@ function CPUTurn(turn) {
             setTimeout(CPUTurn2, 1000)
             rot += 1
         }
-        rotatePlayer()
         console.log("CPU2 turn completed. \nCPU2 bet : "+CPU2Bet+"\nCurrent Pot : "+pot+"\nCPU2 Balance : "+CPU2Balance+"\nrot : "+rot)
     }
     else if (turn == 4) {
@@ -612,6 +617,9 @@ function CPUTurn(turn) {
             CPU3Balance -= currentBet
             // CPU3Bet = currentBet
             document.getElementById("pot").innerHTML = "$" + pot;
+            if (rot != 5) {
+                rotatePlayer()
+            }
         }
         if (rot == 5) {
         if (CPU3Bet == currentBet && flopC == 1 && turnC == 1 && riverC == 1) {
@@ -645,7 +653,6 @@ function CPUTurn(turn) {
             setTimeout(CPUTurn2, 1000)
             rot += 1
         }
-        rotatePlayer()
         console.log("CPU3 turn completed. \nCPU3 bet : "+CPU3Bet+"\nCurrent Pot : "+pot+"\nCPU3 Balance : "+CPU3Balance+"\nrot : "+rot)
     }
     else if (turn == 5) {
@@ -659,7 +666,9 @@ function CPUTurn(turn) {
             CPU4Balance -= currentBet
             // CPU4Bet = currentBet
             document.getElementById("pot").innerHTML = "$" + pot;
-            rotatePlayer()
+            if (rot != 5) {
+                rotatePlayer()
+            }
         }
         if (rot == 5) {
         if (CPU4Bet == currentBet && flopC == 1 && turnC == 1 && riverC == 1) {
@@ -728,7 +737,6 @@ function resetBets() {
 }
 
 function playerTurn() {
-    showPlayerButtons()
     if (rot != 5) {rot += 1}
     if (playerBet == currentBet && flopC == 1 && turnC == 1 && riverC == 1) {
         dealFlopAnimation1();
@@ -754,9 +762,19 @@ function playerTurn() {
         resetBets()
         setTimeout(CPUTurn2, 2000)
     }
+    else {
+        showPlayerButtons()
+        announce("Current Bet")
+    }
 }
 
 function showPlayerButtons() {
+    if (currentBet == 0) {
+        checkButton.innerHTML = "CHECK"
+    }
+    else {
+        checkButton.innerHTML = "CALL"
+    }
     betButton.style.display = "flex"
     foldButton.style.display = "flex"
     checkButton.style.display = "flex"
@@ -767,4 +785,20 @@ function hidePlayerButtons() {
     checkButton.style.display = "none"
 }
 
+var announ = document.getElementById("announcement")
+function announce(announcement) {
+    announ.style.opacity = 1
+    if (announcement == "Current Bet") {
+        announ.innerHTML = "The Current Bet is : $"+currentBet
+    }
+    else {
+        announ.innerHTML = announcement
+    }
+    setTimeout(function() {
+        announ.style.opacity = 0;
+    }, 5000)
+}
 
+function calcPTQ(player) {
+    
+}

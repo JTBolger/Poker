@@ -302,3 +302,23 @@
     height: 9rem;
     transition: 0.75s;
 }
+#announcement {
+    opacity: 0;
+    position: absolute;
+    background-color: #232323be;
+    border-top: 0.15rem solid #777777;
+    border-bottom: 0.15rem solid #777777;
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    z-index: 20;
+    top: 5%;
+    padding-left: 10rem;
+    padding-right: 10rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    transition: 0.5s;
+    background: linear-gradient(to right, #23232344, #232323be 25%),
+                linear-gradient(to left, #23232344, #232323be 25%);
+    background-size: 100% 100%;
+}
