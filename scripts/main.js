@@ -457,6 +457,8 @@ function beginGame() {
     document.getElementById("begin-game").style.display = "none"
     announce("Game Has Begun")
     CPUTurn(1)
+    calcPTQ(PlayerHand)
+    // console.log("AC Suit : "+getSuit("AC")+"\nAC Rank : "+getRank("AC"))
 }
 function callBet() {
     hidePlayerButtons()
@@ -799,6 +801,178 @@ function announce(announcement) {
     }, 5000)
 }
 
-function calcPTQ(player) {
-    
+function getSuit(card) {
+    var suit = card.slice(0, -1);
+    return suit;
+}
+function getRank(card){
+    var rank = card.slice(-1);
+    return rank;
+}
+var playerHandScore = 0
+var CPU1HandScore = 0
+var CPU2HandScore = 0
+var CPU3HandScore = 0
+var CPU4HandScore = 0
+function calcPTQ(hand) { // Player Total 
+    let calcRank = [];
+    let calcSuit = [];
+    for (var i = 0; i<5; i++) {
+        var boardCardSuit = getSuit(Board[i])
+        var boardCardRank = getRank(Board[i])
+        console.log("playerCardSuit : "+playerCardSuit+"\nplayerCardRank : "+playerCardRank)
+
+        calcSuit.push(boardCardRank)
+        calcRank.push(boardCardSuit)
+    }
+    for (var i = 0; i<2; i++) {
+        var playerCardSuit = getSuit(hand[i])
+        var playerCardRank = getRank(hand[i])
+        console.log("playerCardSuit : "+playerCardSuit+"\nplayerCardRank : "+playerCardRank)
+
+        calcSuit.push(playerCardRank)
+        calcRank.push(playerCardSuit)
+    }
+    console.log(calcRank+"\n"+calcSuit)
+    if (calcFourOfAKind(calcRank) == true) {
+        console.error("Player has a Four of a Kind")
+        return 800
+    }
+    else if (calcFullHouse(calcRank) == true) {
+        console.error("Player has a Full House")
+        return 700
+    }
+    else if (calcFlush(calcSuit) == true) {
+        console.error("Player has a Flush")
+        return 600
+    }
+    else if (calcStraight(calcRank) == true) {
+        console.error("Player has a Straight")
+        return 500
+    }
+    else if (calcThreeOfAKind(calcRank) == true) {
+        console.error("Player has Three of a Kind")
+        return 400
+    }
+    else if (calcTwoPair(calcRank) == true) {
+        console.error("Player has a Two Pair")
+        return 300
+    }
+    else if (calcTwoOfAKind(calcRank) == true) {
+        console.error("Player has A Pair")
+        return 200
+    }
+}
+function calcFlush(arr) {
+    for (var i = 0; i < arr.length - 4; i++) {
+        var count = 1;
+        for (var j = i + 1; j < arr.length; j++) {
+            if (arr[i] === arr[j]) {
+                count++;
+                if (count === 5) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+function calcStraight(arr) {
+    arr.sort((a, b) => getNumericValue(a) - getNumericValue(b));
+
+    for (var i = 0; i <= arr.length - 5; i++) {
+        var count = 1;
+        for (var j = i + 1; j < i + 5; j++) {
+            if (getNumericValue(arr[j]) === getNumericValue(arr[i]) + count) {
+                count++;
+                if (count === 5) {
+                    return true; 
+                }
+            }
+        }
+    }
+    return false;
+}
+function calcThreeOfAKind(arr) {
+    arr.sort((a, b) => getNumericValue(a) - getNumericValue(b));
+
+    for (var i = 0; i <= arr.length - 3; i++) {
+        var count = 1;
+        for (var j = i + 1; j < i + 3; j++) {
+            if (getNumericValue(arr[j]) === getNumericValue(arr[i])) {
+                count++;
+                if (count === 3) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+function calcTwoOfAKind(arr) {
+    arr.sort((a, b) => getNumericValue(a) - getNumericValue(b));
+
+    for (var i = 0; i <= arr.length - 2; i++) {
+        if (getNumericValue(arr[i]) === getNumericValue(arr[i + 1])) {
+            return true;
+        }
+    }
+    return false;
+}
+function calcTwoPair(arr) {
+    arr.sort((a, b) => getNumericValue(a) - getNumericValue(b));
+
+    let pairCount = 0;
+
+    for (var i = 0; i <= arr.length - 2; i++) {
+        if (getNumericValue(arr[i]) === getNumericValue(arr[i + 1])) {
+            pairCount++;
+            i++;
+        }
+
+        if (pairCount === 2) {
+            return true;
+        }
+    }
+
+    return false;
+}
+function calcFullHouse(arr) {
+    arr.sort((a, b) => getNumericValue(a) - getNumericValue(b));
+
+    let threeOfAKind = false;
+    let pair = false;
+
+    for (var i = 0; i <= arr.length - 3; i++) {
+        if (getNumericValue(arr[i]) === getNumericValue(arr[i + 1]) && getNumericValue(arr[i]) === getNumericValue(arr[i + 2])) {
+            threeOfAKind = true;
+            i += 2; // Skip the next two cards since they are part of three-of-a-kind
+        }
+
+        if (getNumericValue(arr[i]) === getNumericValue(arr[i + 1])) {
+            pair = true;
+            i++; // Skip the next card since it's part of a pair
+        }
+    }
+
+    return threeOfAKind && pair;
+}
+function calcFourOfAKind(arr) {
+    arr.sort((a, b) => getNumericValue(a) - getNumericValue(b));
+
+    for (var i = 0; i <= arr.length - 4; i++) {
+        if (
+            getNumericValue(arr[i]) === getNumericValue(arr[i + 1]) &&
+            getNumericValue(arr[i]) === getNumericValue(arr[i + 2]) &&
+            getNumericValue(arr[i]) === getNumericValue(arr[i + 3])
+        ) {
+            return true;
+        }
+    }
+
+    return false;
+}
+function getNumericValue(card) {
+    const cardValues = { A: [1, 14], J: 11, Q: 12, K: 13 };
+    return Array.isArray(cardValues[card]) ? cardValues[card][0] : cardValues[card] || parseInt(card, 10);
 }
