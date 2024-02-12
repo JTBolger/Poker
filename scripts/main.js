@@ -427,21 +427,22 @@ console.log('PlayerHand:', PlayerHand);
 console.log('Board:', Board);
 console.log('DealtCards:', dealtCards);
 
-var CPU1 = [
-    { balance: 100, fold: 0, bet: 0, handScore: 0 }
-];
-var CPU2 = [
-    { balance: 100, fold: 0, bet: 0, handScore: 0 }
-];
-var CPU3 = [
-    { balance: 100, fold: 0, bet: 0, handScore: 0 }
-];
-var CPU4 = [
-    { balance: 100, fold: 0, bet: 0, handScore: 0 }
-];
-let PlayerOne = [
-    { bal: 100, fold: 0, bet: 0}
-];
+var CPU1 = { balance: 100, fold: 0, bet: 0, handScore: 0 }
+
+var CPU2 = { balance: 100, fold: 0, bet: 0, handScore: 0 }
+
+var CPU3 = { balance: 100, fold: 0, bet: 0, handScore: 0 }
+
+var CPU4 = { balance: 100, fold: 0, bet: 0, handScore: 0 }
+
+let PlayerOne = { bal: 100, fold: 0, bet: 0}
+
+
+// var CPU1Fold = 0
+// var CPU2Fold = 0
+// var CPU3Fold = 0
+// var CPU4Fold = 0
+// var PlayerOneFold = 0
 
 PlayerOne.bet = 0
 var pot = 0
@@ -783,7 +784,7 @@ function CPUTurn2() {
 }
 
 function determineWinner() {
-    var value1, value2, value3, value4, value5 = 0;
+    var value1 = 0, value2 = 0, value3 = 0, value4 = 0, value5 = 0;
     function calcScores() {
         if (CPU1.fold == 0) {
             value1 = calcPTQ(CPU1Hand)
@@ -802,73 +803,87 @@ function determineWinner() {
         } else { value5 = 0 }        
     }
     calcScores()
+    console.log("CPU1 Score : "+value1+"\nCPU2 Score : "+value2+"\nCPU3 Score : "+value3+"\nCPU4 Score : "+value4+"\nPlayer Score : "+value5)
     let largest = value1;
     let largestValues = [value1];
     let playerToSplit = [];
 
-    if (value2 > largest) {
-        largest = value2;
-        largestValues = [value2];
-    } else if (value2 === largest) {
-        largestValues.push(value2);
-        // playerToSplit.push = CPU2
+    if (value2 > value1 && value2 > value3 && value2 > value4 && value2 > value5) {
+        announce("CPU 2 Wins!")
+        console.log("CPU 2 Wins!")
+        winner(CPU2)
+        largest = value2
+    } 
+
+    else if (value3 > value1 && value3 > value2 && value3 > value4 && value3 > value5) {
+        announce("CPU 3 Wins!")
+        console.log("CPU 3 Wins!")
+        winner(CPU3)
+        largest = value3
     }
 
-    if (value3 > largest) {
-        largest = value3;
-        largestValues = [value3];
-    } else if (value3 === largest) {
-        largestValues.push(value3);
-        // playerToSplit.push = CPU3
+    else if (value4 > value1 && value4 > value2 && value4 > value3 && value4 > value5) {
+        announce("CPU 4 Wins!")
+        console.log("CPU 5 Wins!")
+        winner(CPU4)
+        largest = value4
     }
 
-    if (value4 > largest) {
-        largest = value4;
-        largestValues = [value4];
-    } else if (value4 === largest) {
-        largestValues.push(value4);
-        // playerToSplit.push = CPU4
+    else if (value5 > value1 && value5 > value2 && value5 > value3 && value5 > value4) {
+        announce("Player One Wins!")
+        console.log("Player One Wins!")
+        winner(PlayerOne)
+        largest = value5
     }
 
-    if (value5 > largest) {
-        largest = value5;
-        largestValues = [value5];
-    } else if (value5 === largest) {
-        largestValues.push(value5);
-        // playerToSplit.push = PlayerOne
-    }
-
-    if (largestValues.length > 1) {
+    if (largestValues.length > 2) {
         splitPot(playerToSplit);
     }
     else {
         if (largest == value1) {
-            winner(CPU1)
             announce("CPU 1 Wins!")
             console.log("CPU 1 Wins!")
+            winner(CPU1)
         }
         else if (largest == value2) {
-            winner(CPU2)
             announce("CPU 2 Wins!")
             console.log("CPU 2 Wins!")
+            winner(CPU2)
         }
         else if (largest == value3) {
-            winner(CPU3)
             announce("CPU 3 Wins!")
             console.log("CPU 3 Wins!")
+            winner(CPU3)
         }
         else if (largest == value4) {
-            winner(CPU4)
             announce("CPU 4 Wins!")
             console.log("CPU 5 Wins!")
+            winner(CPU4)
         }
         else if (largest == value5) {
-            winner(PlayerOne)
             announce("Player One Wins!")
             console.log("Player One Wins!")
+            winner(PlayerOne)
         }
     }
     setTimeout(resetBets, 5000)
+}
+
+function winner(player) {
+    player.balance += pot
+
+    document.getElementById("CPU1-card-1").innerHTML = changePicture(CPU1Hnad[0])
+    document.getElementById("CPU1-card-2").innerHTML = changePicture(CPU1Hnad[1])
+
+    document.getElementById("CPU2-card-1").innerHTML = changePicture(CPU2Hnad[0])
+    document.getElementById("CPU2-card-2").innerHTML = changePicture(CPU2Hnad[1])
+
+    document.getElementById("CPU3-card-1").innerHTML = changePicture(CPU3Hnad[0])
+    document.getElementById("CPU3-card-2").innerHTML = changePicture(CPU3Hnad[1])
+
+    document.getElementById("CPU4-card-1").innerHTML = changePicture(CPU4Hnad[0])
+    document.getElementById("CPU4-card-2").innerHTML = changePicture(CPU4Hnad[1])
+
 }
 
 function splitPot(playerArray) {
@@ -1030,6 +1045,9 @@ function calcPTQ(hand) { // Player Total
     else if (calcTwoOfAKind(calcRank) == true) {
         console.error("Player has A Pair")
         return 200 + extraValue
+    }
+    else {
+        return 0 + extraValue
     }
 }
 function calcFlush(arr) {
