@@ -805,8 +805,6 @@ function determineWinner() {
     calcScores()
     console.log("CPU1 Score : "+value1+"\nCPU2 Score : "+value2+"\nCPU3 Score : "+value3+"\nCPU4 Score : "+value4+"\nPlayer Score : "+value5)
     let largest = value1;
-    let largestValues = [value1];
-    let playerToSplit = [];
 
     if (value2 > value1 && value2 > value3 && value2 > value4 && value2 > value5) {
         announce("CPU 2 Wins!")
@@ -824,7 +822,7 @@ function determineWinner() {
 
     else if (value4 > value1 && value4 > value2 && value4 > value3 && value4 > value5) {
         announce("CPU 4 Wins!")
-        console.log("CPU 5 Wins!")
+        console.log("CPU 4 Wins!")
         winner(CPU4)
         largest = value4
     }
@@ -835,54 +833,29 @@ function determineWinner() {
         winner(PlayerOne)
         largest = value5
     }
-
-    if (largestValues.length > 2) {
-        splitPot(playerToSplit);
-    }
     else {
-        if (largest == value1) {
-            announce("CPU 1 Wins!")
-            console.log("CPU 1 Wins!")
-            winner(CPU1)
-        }
-        else if (largest == value2) {
-            announce("CPU 2 Wins!")
-            console.log("CPU 2 Wins!")
-            winner(CPU2)
-        }
-        else if (largest == value3) {
-            announce("CPU 3 Wins!")
-            console.log("CPU 3 Wins!")
-            winner(CPU3)
-        }
-        else if (largest == value4) {
-            announce("CPU 4 Wins!")
-            console.log("CPU 5 Wins!")
-            winner(CPU4)
-        }
-        else if (largest == value5) {
-            announce("Player One Wins!")
-            console.log("Player One Wins!")
-            winner(PlayerOne)
-        }
+        announce("CPU 1 Wins!")
+        console.log("CPU 1 Wins!")
+        winner(CPU4)
     }
     setTimeout(resetBets, 5000)
 }
 
 function winner(player) {
     player.balance += pot
+    console.log(player+" Balance = "+player.balance)
 
-    document.getElementById("CPU1-card-1").innerHTML = changePicture(CPU1Hnad[0])
-    document.getElementById("CPU1-card-2").innerHTML = changePicture(CPU1Hnad[1])
+    document.getElementById("CPU1-card-1").innerHTML = changePicture(CPU1Hand[0])
+    document.getElementById("CPU1-card-2").innerHTML = changePicture(CPU1Hand[1])
 
-    document.getElementById("CPU2-card-1").innerHTML = changePicture(CPU2Hnad[0])
-    document.getElementById("CPU2-card-2").innerHTML = changePicture(CPU2Hnad[1])
+    document.getElementById("CPU2-card-1").innerHTML = changePicture(CPU2Hand[0])
+    document.getElementById("CPU2-card-2").innerHTML = changePicture(CPU2Hand[1])
 
-    document.getElementById("CPU3-card-1").innerHTML = changePicture(CPU3Hnad[0])
-    document.getElementById("CPU3-card-2").innerHTML = changePicture(CPU3Hnad[1])
+    document.getElementById("CPU3-card-1").innerHTML = changePicture(CPU3Hand[0])
+    document.getElementById("CPU3-card-2").innerHTML = changePicture(CPU3Hand[1])
 
-    document.getElementById("CPU4-card-1").innerHTML = changePicture(CPU4Hnad[0])
-    document.getElementById("CPU4-card-2").innerHTML = changePicture(CPU4Hnad[1])
+    document.getElementById("CPU4-card-1").innerHTML = changePicture(CPU4Hand[0])
+    document.getElementById("CPU4-card-2").innerHTML = changePicture(CPU4Hand[1])
 
 }
 
